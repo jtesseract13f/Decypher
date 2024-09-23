@@ -59,6 +59,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FreqForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreqForm.Designer.cs">
+      <DependentUpon>FreqForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaces\IEncryptor.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -75,6 +81,9 @@
     <Compile Include="Services\Vigenere.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FreqForm.resx">
+      <DependentUpon>FreqForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

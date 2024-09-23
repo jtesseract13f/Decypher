@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CypherLogic.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,17 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace CesarDecypher
 {
-    using CypherLogic.Services;
-    using System;
-    using System.Collections.Generic;
-    using System.Windows.Forms;
- 
-
-    public partial class Form1 : Form
+    public partial class FreqForm : Form
     {
         readonly Dictionary<char, double> letterFrequencies = new Dictionary<char, double>
             {
@@ -84,63 +78,41 @@ namespace CesarDecypher
                 { 'ъ', 0.037 },
                 { 'ё', 0.013 }
             };
-        Dictionary<char, double> messageFreq;
-        public Form1(Dictionary<char, double> frg)
+
+        public FreqForm(string language)
         {
-            messageFreq = frg;
             InitializeComponent();
-            InitializeChart();
+            InitializeDataGridView();
+            if (language == "ru")
+            {
+                DisplayDictionaryInDataGridView(russianLetterFrequencies);
+            }
+            else
+            {
+                DisplayDictionaryInDataGridView(letterFrequencies);
+            }
         }
 
-        private void InitializeChart()
+        private void InitializeDataGridView()
         {
-            chart1.Series.Clear();
+            dataGridView1.ColumnCount = 2;
+            dataGridView1.Columns[0].Name = "Character";
+            dataGridView1.Columns[1].Name = "Value";
 
-            Series russian = new Series
-            {
-                Name = "Русский алфавит",
-                Color = System.Drawing.Color.Blue,
-                ChartType = SeriesChartType.Line
-            };
-            Series english = new Series
-            {
-                Name = "Английский алфавит",
-                Color = Color.BlueViolet,
-                ChartType = SeriesChartType.Line
-            };
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        private void DisplayDictionaryInDataGridView(Dictionary <char, double> d)
+        {
+            dataGridView1.Rows.Clear();
 
-            Series message = new Series
+            foreach (var kvp in d)
             {
-                Name = "Частотный анализ текста",
-                Color = Color.Red,
-                ChartType = SeriesChartType.Line
-            };
-
-            chart1.Series.Add(russian);
-            chart1.Series.Add(english);
-            chart1.Series.Add(message);
-
-            foreach (var kvp in russianLetterFrequencies)
-            {
-                russian.Points.AddXY(kvp.Key.ToString(), kvp.Value);
+                dataGridView1.Rows.Add(kvp.Key, kvp.Value);
             }
-            foreach (var kvp in letterFrequencies.OrderByDescending(x => x.Value))
-            {
-                english.Points.AddXY(kvp.Key.ToString(), kvp.Value);
-            }
-            foreach (var kvp in messageFreq.OrderByDescending(x => x.Value))
-            {
-                message.Points.AddXY(kvp.Key.ToString(), kvp.Value*100);
-            }
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-            chart1.ChartAreas[0].AxisY.Title = "Частота (%)";
-
-            chart1.ChartAreas[0].AxisY.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Maximum = 12;
-            chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
-            chart1.ChartAreas[0].AxisX.Interval = 1;
-            chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
         }
     }
 }
