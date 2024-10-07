@@ -41,8 +41,6 @@
             this.magicButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.buttonFrequency = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -168,33 +166,13 @@
             // 
             // buttonFrequency
             // 
-            this.buttonFrequency.Location = new System.Drawing.Point(623, 36);
+            this.buttonFrequency.Location = new System.Drawing.Point(623, 29);
             this.buttonFrequency.Name = "buttonFrequency";
             this.buttonFrequency.Size = new System.Drawing.Size(340, 23);
             this.buttonFrequency.TabIndex = 12;
             this.buttonFrequency.Text = "График частотности";
             this.buttonFrequency.UseVisualStyleBackColor = true;
             this.buttonFrequency.Click += new System.EventHandler(this.buttonFrequency_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(623, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Russian";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(711, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "English";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -212,8 +190,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 450);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonFrequency);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.magicButton);
@@ -251,8 +227,6 @@
         private System.Windows.Forms.Button magicButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonFrequency;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
     }
 }

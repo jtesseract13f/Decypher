@@ -102,12 +102,6 @@ namespace CesarDecypher
                 Color = System.Drawing.Color.Blue,
                 ChartType = SeriesChartType.Line
             };
-            Series english = new Series
-            {
-                Name = "Английский алфавит",
-                Color = Color.BlueViolet,
-                ChartType = SeriesChartType.Line
-            };
 
             Series message = new Series
             {
@@ -117,16 +111,11 @@ namespace CesarDecypher
             };
 
             chart1.Series.Add(russian);
-            chart1.Series.Add(english);
             chart1.Series.Add(message);
 
             foreach (var kvp in russianLetterFrequencies)
             {
                 russian.Points.AddXY(kvp.Key.ToString(), kvp.Value);
-            }
-            foreach (var kvp in letterFrequencies.OrderByDescending(x => x.Value))
-            {
-                english.Points.AddXY(kvp.Key.ToString(), kvp.Value);
             }
             foreach (var kvp in messageFreq.OrderByDescending(x => x.Value))
             {
@@ -136,11 +125,13 @@ namespace CesarDecypher
             chart1.ChartAreas[0].AxisY.Title = "Частота (%)";
 
             chart1.ChartAreas[0].AxisY.Minimum = 0;
-            chart1.ChartAreas[0].AxisY.Maximum = 12;
-            chart1.ChartAreas[0].AxisX.Enabled = AxisEnabled.False;
+            chart1.ChartAreas[0].AxisY.Maximum = 13;
+            chart1.ChartAreas[0].AxisY.Interval = 1;
+            chart1.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
+            chart1.ChartAreas[0].AxisX.IsInterlaced = true;
             chart1.ChartAreas[0].AxisX.Interval = 1;
             chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.LightGray;
+            chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = System.Drawing.Color.DarkGray;
         }
     }
 }

@@ -126,7 +126,7 @@ namespace CesarDecypher
             var fra = frequencyAnalysator.FrequencyAnalys.OrderByDescending(x => x.Value).ToArray();
             foreach (var kvp in fra)
             {
-                dataGridView1.Rows.Add(kvp.Key, kvp.Value*100, fr[ind].Key, fr[ind].Value);
+                dataGridView1.Rows.Add(kvp.Key, Math.Round(kvp.Value*100000)/1000, fr[ind].Key, fr[ind].Value);
                 ++ind;
             }
         }
