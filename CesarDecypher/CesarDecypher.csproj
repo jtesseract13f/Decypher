@@ -76,6 +76,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Cesar.cs" />
     <Compile Include="Services\FrequencyAnalysator.cs" />
+    <Compile Include="Services\Hill\Hill.cs" />
+    <Compile Include="Services\Hill\HillCypher.cs" />
+    <Compile Include="Services\Hill\HillKeyGen.cs" />
+    <Compile Include="Services\Hill\ModularArithmetics.cs" />
     <Compile Include="Services\KeyProcessor.cs" />
     <Compile Include="Services\MonoAlphabet.cs" />
     <Compile Include="Services\Vigenere.cs" />
