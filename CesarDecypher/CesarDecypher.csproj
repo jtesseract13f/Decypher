@@ -79,6 +79,7 @@
     <Compile Include="Services\Hill\Hill.cs" />
     <Compile Include="Services\Hill\HillCypher.cs" />
     <Compile Include="Services\Hill\HillKeyGen.cs" />
+    <Compile Include="Services\Hill\Matrix.cs" />
     <Compile Include="Services\Hill\ModularArithmetics.cs" />
     <Compile Include="Services\KeyProcessor.cs" />
     <Compile Include="Services\MonoAlphabet.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CesarDecypher.Services.Hill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,18 @@ namespace CesarDecypher
         [STAThread]
         static void Main()
         {
+            try
+            {
+                var matrix = new List<List<int>>() {
+                    new List<int>() { 1, 2, 300} ,
+                    new List<int>() { 6, 50, 40} ,
+                    new List<int>() { 7, 8, 9} ,
+                };
+                Matrix m = new Matrix(matrix);
+
+                m.FindDeterminant();
+            }
+            catch (Exception ex) { }
             try
             {
                 Application.EnableVisualStyles();

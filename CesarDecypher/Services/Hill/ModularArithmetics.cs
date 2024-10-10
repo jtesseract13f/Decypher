@@ -20,17 +20,4 @@ namespace CesarDecypher.Services.Hill
         }
     }
 
-    public static class MatrixOperations
-    {
-        public static void FindDeterminant(int[,] matrix)
-        {
-            // determinant must to be INTEGER
-            // TO DO: find a determinant of matrix
-        }
-
-        public static void CalculateAlgebraicAddition(int[,] matrix, int i, int j)
-        {
-            //find AlgebraicAddition for determinant computing
-        }
-    }
 }
