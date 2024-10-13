@@ -71,7 +71,8 @@
             "Caesar",
             "MonoAlphabet",
             "Vigenere",
-            "Tritemius"});
+            "Tritemius",
+            "Hill"});
             this.EncryptMetod.Location = new System.Drawing.Point(12, 31);
             this.EncryptMetod.Name = "EncryptMetod";
             this.EncryptMetod.Size = new System.Drawing.Size(249, 95);

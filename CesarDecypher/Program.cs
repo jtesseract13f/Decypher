@@ -17,16 +17,6 @@ namespace CesarDecypher
         {
             try
             {
-                var matrix = new List<List<int>>() {
-                    new List<int>() { 5, 3} ,
-                    new List<int>() { 4, 1} ,
-                };
-
-                HillKeyGen.ValidateKey(matrix, "abcdefghijklmnopqrstuvwxyz");
-            }
-            catch (Exception ex) { }
-            try
-            {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MainForm());

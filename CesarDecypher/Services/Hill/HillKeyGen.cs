@@ -37,6 +37,8 @@ namespace CesarDecypher.Services.Hill
                 throw new Exception("Детерминант матрицы не взаимнопростой с длиной алфавита");
             }
 
+            var inverse = matrix.GetInverseMatrix(_alphabet.Length);
+
         }
     }
 }

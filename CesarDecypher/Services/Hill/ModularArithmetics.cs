@@ -17,7 +17,25 @@ namespace CesarDecypher.Services.Hill
             }
             return FindNod(b, a % b);
         }
-        
+
+        public static (int, int, int) GcdExtend(int a, int b)
+        {
+            if (a == 0)
+            {
+                return (b, 0, 1);
+            }
+            int x1, y1, d;
+            (x1, y1, d) = GcdExtend(b%a, a);
+            
+            return (d, y1 - (b / a) * x1, x1);
+        }
+
+        public static int toPositive(this int a, int n)
+        {
+            int res = (a % n + n) % n;
+            return res;
+        }
+
     }
 
 }

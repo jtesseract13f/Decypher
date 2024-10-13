@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CesarDecypher.Services;
+using CesarDecypher.Services.Hill;
 using CypherLogic.Interfaces;
 using CypherLogic.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -189,6 +190,10 @@ namespace CesarDecypher
                     return new Vigenere(key, alphabet);
                 case "Tritemius":
                     return new Vigenere(key, alphabet);
+                case "Hill":
+                    var hill = new Hill(alphabet);
+                    hill.ParseKey(key);
+                    return hill;
                 default:
                     return new Cesar(int.Parse(key), alphabet);
             }
