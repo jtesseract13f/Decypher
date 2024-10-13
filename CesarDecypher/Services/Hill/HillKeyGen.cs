@@ -8,7 +8,8 @@ namespace CesarDecypher.Services.Hill
 {
     public class HillKeyGen
     {
-        
+        Matrix keyMatrix;
+        char[] alphabet;
         public HillKeyGen() { }
         public int[,] GenKeyForHill(int matrixSize)
         {
@@ -18,11 +19,24 @@ namespace CesarDecypher.Services.Hill
             return keyMatrix;
         }
 
-        public void ValidateKey()
+        public static void ValidateKey(List<List<int>> key, string _alphabet)
         {
-            // validate key 
-            // TO DO: find determinant of matrix and check them
-            // find A Mutually Prime Number Modulo
+            var matrix = new Matrix(key);
+            var determinant = matrix.FindDeterminant();
+            if (determinant == 0)
+            {
+                throw new Exception("Детерминант матрицы не должен быть равен нулю");
+            }
+            if (determinant < 0)
+            {
+                determinant =  _alphabet.Length - (-determinant % _alphabet.Length);
+            }
+            var t = ModularArithmetics.FindNod(determinant % _alphabet.Length, _alphabet.Length);
+            if (t != 1)
+            {
+                throw new Exception("Детерминант матрицы не взаимнопростой с длиной алфавита");
+            }
+
         }
     }
 }

@@ -18,13 +18,11 @@ namespace CesarDecypher
             try
             {
                 var matrix = new List<List<int>>() {
-                    new List<int>() { 1, 2, 300} ,
-                    new List<int>() { 6, 50, 40} ,
-                    new List<int>() { 7, 8, 9} ,
+                    new List<int>() { 5, 3} ,
+                    new List<int>() { 4, 1} ,
                 };
-                Matrix m = new Matrix(matrix);
 
-                m.FindDeterminant();
+                HillKeyGen.ValidateKey(matrix, "abcdefghijklmnopqrstuvwxyz");
             }
             catch (Exception ex) { }
             try

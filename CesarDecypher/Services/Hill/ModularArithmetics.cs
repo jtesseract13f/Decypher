@@ -8,16 +8,16 @@ namespace CesarDecypher.Services.Hill
 {
     public static class ModularArithmetics
     {
-        public static int FindNod(int a, int b) // NEED TO TEST, or check alg
+        public static int FindNod(int a, int b) 
         {
-            a = a > b ? a : b;
-            b = a > b ? b : a;
-            if (b <= 1)
+            if (a < b) { int temp = a; a = b; b = temp; }
+            if (b == 0)
             {
                 return a;
             }
             return FindNod(b, a % b);
         }
+        
     }
 
 }
