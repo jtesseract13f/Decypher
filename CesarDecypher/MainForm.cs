@@ -190,10 +190,10 @@ namespace CesarDecypher
                     return new Vigenere(key, alphabet);
                 case "Tritemius":
                     return new Vigenere(key, alphabet);
-                case "Hill":
-                    var hill = new Hill(alphabet);
-                    hill.ParseKey(key);
-                    return hill;
+                //case "Hill":
+                    //var hill = new Hill(alphabet);
+                    //hill.ParseKey(key);
+                    //return hill;
                 default:
                     return new Cesar(int.Parse(key), alphabet);
             }
