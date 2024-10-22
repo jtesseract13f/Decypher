@@ -8,7 +8,7 @@ namespace CesarDecypher.Services.Hill
 {
     public static class Matrix
     {
-        public static List<List<int>> Multiply(List<List<int>> first, List<List<int>> second)
+        public static List<List<int>> Multiply(this List<List<int>> first, List<List<int>> second)
         {
             if (first[0].Count != second.Count)
             {
@@ -33,7 +33,7 @@ namespace CesarDecypher.Services.Hill
         public static List<List<int>> InverseModulo(this List<List<int>> matrix, int modulo)
         {
             var result = matrix.Incidence();
-            var inverseDeterminant = 1; /////////////////////////////
+            var inverseDeterminant = matrix.Determinant().InverseModulo(modulo);
             for (int i = 0; i < matrix.Count; ++i)
             {
                 for (int j = 0; j < matrix.Count; ++j)

@@ -17,6 +17,7 @@ namespace CesarDecypher
         {
             try
             {
+                
                 var mat = Matrix.Multiply(
                     new List<List<int>>
                     {
@@ -29,9 +30,9 @@ namespace CesarDecypher
                         new List<int>{0, 1}
                     }
                     );
-                var d = mat.Incidence();
-
-                var inv = mat.Determinant().InverseModulo(26);
+                var Hill = new Hill("abcdefghijklmnopqrstuvwxyz".ToCharArray(), "6 24 1 2 7;13 16 10 13 1;18 2 23 15 7;9 24 11 16 21;20 7 22 3 17");
+                var encryptedMessage = Hill.Encrypt("hello");
+                var decryptedMessage = Hill.Decrypt(encryptedMessage);
             }
             catch (Exception ex)
             {
@@ -39,9 +40,9 @@ namespace CesarDecypher
             }
             try
             {
-                //Application.EnableVisualStyles();
-                //Application.SetCompatibleTextRenderingDefault(false);
-                //Application.Run(new MainForm());
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MainForm());
             }
             catch
             {

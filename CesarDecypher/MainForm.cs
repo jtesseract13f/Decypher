@@ -190,10 +190,9 @@ namespace CesarDecypher
                     return new Vigenere(key, alphabet);
                 case "Tritemius":
                     return new Vigenere(key, alphabet);
-                //case "Hill":
-                    //var hill = new Hill(alphabet);
-                    //hill.ParseKey(key);
-                    //return hill;
+                case "Hill":
+                    var hill = new Hill(alphabet.ToArray(), key);
+                    return hill;
                 default:
                     return new Cesar(int.Parse(key), alphabet);
             }
@@ -299,6 +298,8 @@ namespace CesarDecypher
                 case "Tritemius":
                     string shuffledTAlphabet = new string(alphabet.OrderBy(c => rand.Next()).ToArray()).Replace(alphabet.First(), alphabet.Last());
                     keyBox.Text = shuffledTAlphabet.ToString();
+                    break;
+                case "Hill":
                     break;
                 default:
                     keyBox.Text = (rand.Next() % alphabet.Length).ToString();

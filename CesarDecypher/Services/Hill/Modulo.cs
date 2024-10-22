@@ -10,10 +10,10 @@ namespace CesarDecypher.Services.Hill
     {
         public static int InverseModulo(this int n, int modulo)
         {
-            //n = n.ToPositive(modulo);
-            for (int i = 2; i < modulo; ++i)
+            n = n.ToPositive(modulo);
+            for (int i = modulo; i > 1; --i)
             {
-                if (Gcd(modulo, n*i) == 1)
+                if ((i*n)%modulo == 1)
                 {
                     return i;
                 }
