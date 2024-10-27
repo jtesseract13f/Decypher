@@ -8,7 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CesarDecypher.Infrasturcture;
 using CesarDecypher.Services;
+using CesarDecypher.Services.Cyphers;
+using CesarDecypher.Services.KeyGens;
 using CypherLogic.Interfaces;
 using CypherLogic.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -18,7 +21,6 @@ namespace CesarDecypher
     public partial class MainForm : Form
     {
         public List<string> encryptorsNames;
-        public CypherController controller;
         public string key;
         public char[] alphabet;
         public string message;
@@ -131,11 +133,6 @@ namespace CesarDecypher
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             EncryptMetod.Select();
@@ -145,7 +142,7 @@ namespace CesarDecypher
         {
             try
             {
-                var decryptor = MakeEncryptor(EncryptMetod.Text);
+                var decryptor = this.MakeEncryptor(EncryptMetod.Text);
                 result = decryptor.Decrypt(message);
                 Result.Text = result;
                 frequencyAnalysator = new FrequencyAnalysator(alphabet);
@@ -163,7 +160,7 @@ namespace CesarDecypher
         {
             try
             {
-                var encryptor = MakeEncryptor(EncryptMetod.Text);
+                var encryptor = this.MakeEncryptor(EncryptMetod.Text);
                 result = encryptor.Encrypt(message);
                 Result.Text = result;
                 frequencyAnalysator = new FrequencyAnalysator(alphabet);
@@ -177,22 +174,7 @@ namespace CesarDecypher
             
         }
 
-        private IEncryptor MakeEncryptor(string selectedMethod)
-        {
-            switch (selectedMethod) 
-            {
-                case "Caesar":
-                    return new Cesar(int.Parse(key), alphabet);
-                case "MonoAlphabet":
-                    return new MonoAlphabet(key.ToArray(), alphabet);
-                case "Vigenere":
-                    return new Vigenere(key, alphabet);
-                case "Tritemius":
-                    return new Vigenere(key, alphabet);
-                default:
-                    return new Cesar(int.Parse(key), alphabet);
-            }
-        }
+
 
         private void Result_TextChanged(object sender, EventArgs e)
         {
@@ -221,58 +203,14 @@ namespace CesarDecypher
 
         private void buttonFrequency_Click(object sender, EventArgs e)
         {
-            var plot = new Form1(frequencyAnalysator.FrequencyAnalys);
+            var plot = new FrequencyPlot(frequencyAnalysator.FrequencyAnalys);
             plot.Show();
 
         }
 
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-
-            if (m.Msg == WM_VSCROLL && Result.Focused)
-            {
-                int scrollPosition = GetScrollPos(Result.Handle, 1);
-
-                SetScrollPos(textBox1.Handle, 1, scrollPosition, true);
-                SendMessage(textBox1.Handle, WM_VSCROLL, (IntPtr)SB_THUMBPOSITION, IntPtr.Zero);
-            }
-
-            if (m.Msg == WM_VSCROLL && textBox1.Focused)
-            {
-                int scrollPosition = GetScrollPos(textBox1.Handle, 1);
-                SetScrollPos(Result.Handle, 1, scrollPosition, true);
-                SendMessage(Result.Handle, WM_VSCROLL, (IntPtr)SB_THUMBPOSITION, IntPtr.Zero);
-            }
-        }
-
-        [DllImport("user32.dll")]
-        static extern int GetScrollPos(IntPtr hWnd, int nBar);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
         private void MainForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            new FreqForm("ru").Show();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            new FreqForm("eng").Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -294,6 +232,10 @@ namespace CesarDecypher
                 case "Tritemius":
                     string shuffledTAlphabet = new string(alphabet.OrderBy(c => rand.Next()).ToArray()).Replace(alphabet.First(), alphabet.Last());
                     keyBox.Text = shuffledTAlphabet.ToString();
+                    break;
+                case "Hill":
+                    var geyken = new HillKeyGen(alphabet.ToArray());
+                    keyBox.Text = geyken.GenerateKey(2);
                     break;
                 default:
                     keyBox.Text = (rand.Next() % alphabet.Length).ToString();

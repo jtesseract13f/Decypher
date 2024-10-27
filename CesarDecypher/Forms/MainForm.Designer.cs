@@ -62,7 +62,6 @@
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Key";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // EncryptMetod
             // 
@@ -71,7 +70,8 @@
             "Caesar",
             "MonoAlphabet",
             "Vigenere",
-            "Tritemius"});
+            "Tritemius",
+            "Hill"});
             this.EncryptMetod.Location = new System.Drawing.Point(12, 31);
             this.EncryptMetod.Name = "EncryptMetod";
             this.EncryptMetod.Size = new System.Drawing.Size(249, 95);
@@ -162,7 +162,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(338, 376);
             this.dataGridView1.TabIndex = 11;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonFrequency
             // 

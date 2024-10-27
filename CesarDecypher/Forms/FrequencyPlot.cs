@@ -17,7 +17,7 @@ namespace CesarDecypher
     using System.Windows.Forms;
  
 
-    public partial class Form1 : Form
+    public partial class FrequencyPlot : Form
     {
         readonly Dictionary<char, double> letterFrequencies = new Dictionary<char, double>
             {
@@ -85,7 +85,7 @@ namespace CesarDecypher
                 { 'ё', 0.013 }
             };
         Dictionary<char, double> messageFreq;
-        public Form1(Dictionary<char, double> frg)
+        public FrequencyPlot(Dictionary<char, double> frg)
         {
             messageFreq = frg;
             InitializeComponent();

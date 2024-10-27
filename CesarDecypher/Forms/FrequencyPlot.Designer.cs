@@ -1,6 +1,6 @@
 ﻿namespace CesarDecypher
 {
-    partial class Form1
+    partial class FrequencyPlot
     {
         /// <summary>
         /// Required designer variable.

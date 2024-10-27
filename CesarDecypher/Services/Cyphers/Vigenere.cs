@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CypherLogic.Services
 {
-    public class Vigenere : IEncryptor
+    public class Vigenere : ICypher
     {
         public string AlghorithmName { get => "Vigenere Encryptor"; set => value = "Vigenere Encryptor"; }
         string key;
