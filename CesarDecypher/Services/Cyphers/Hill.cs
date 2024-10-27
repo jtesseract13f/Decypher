@@ -1,13 +1,14 @@
-﻿using CypherLogic.Interfaces;
+﻿using CesarDecypher.Infrasturcture;
+using CypherLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CesarDecypher.Services.Hill
+namespace CesarDecypher.Services.Cyphers
 {
-    public class Hill : IEncryptor
+    public class Hill : ICypher
     {
         public char[] _alphabet;
         public Dictionary<char, int> _charToInt;
@@ -29,7 +30,7 @@ namespace CesarDecypher.Services.Hill
             return Encrypt(message);
         }
 
-        public List<List<int>> ParseKey(string key) 
+        public static List<List<int>> ParseKey(string key) 
         {
             var columns = key.Split(';');
             var matrix = columns.Select(x => x.Split(' ', ','));

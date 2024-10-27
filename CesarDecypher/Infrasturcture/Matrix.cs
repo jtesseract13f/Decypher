@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CesarDecypher.Services.Hill
+namespace CesarDecypher.Infrasturcture
 {
     public static class Matrix
     {
@@ -58,7 +58,6 @@ namespace CesarDecypher.Services.Hill
             }
             return result;
         }
-
         public static int Determinant(this List<List<int>> matrix)
         {
             if (matrix.Count != matrix[0].Count) { throw new Exception("Матрица не является квадратной"); }
@@ -89,6 +88,36 @@ namespace CesarDecypher.Services.Hill
                 }
             }
             return result;
+        }
+
+        public static void RandomizeMatrix(this List<List<int>> matrix)
+        {
+            var rand = new Random();
+            for (int i = 0; i < matrix[0].Count; i++)
+            {
+                for (int j = 0; j < matrix[0].Count; j++)
+                {
+                    matrix[i][j] = rand.Next();
+                }
+            }
+        }
+
+        public static string MatrixToString(this List<List<int>> matrix)
+        {
+            StringBuilder result = new StringBuilder("");
+            foreach (var row in matrix)
+            {
+                result.Append(';');
+                foreach (var element in row)
+                {
+                    result.Append(element.ToString());
+                    result.Append(' ');
+                }
+                result.Remove(result.Length - 1, 1);
+            }
+            result.Remove(0, 1);
+
+            return result.ToString();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace CypherLogic.Interfaces
 {
-    public interface IEncryptor
+    public interface ICypher
     {
         string AlghorithmName { get; set; }
         string Encrypt(string message);

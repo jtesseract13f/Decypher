@@ -115,7 +115,6 @@ namespace CesarDecypher.Services
 
         public string ProcessMonoalphabet(char[] alphabet, string message)
         {
-            
             return "";
         }
     }

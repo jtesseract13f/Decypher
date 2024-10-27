@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CypherLogic.Services
 {
-    public class Cesar : IEncryptor
+    public class Cesar : ICypher
     {
         private int key;
         public char[] alphabet;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CypherLogic.Services
 {
-    public class MonoAlphabet : IEncryptor
+    public class MonoAlphabet : ICypher
     {
         public string AlghorithmName { get; set; }
         public char[] alphabet;
@@ -51,7 +51,6 @@ namespace CypherLogic.Services
                 if (decryptor.ContainsKey(message[i]))
                     decryptMessage[i] = decryptor[message[i]];
             }
-
             return decryptMessage.ToString();
         }
     }
