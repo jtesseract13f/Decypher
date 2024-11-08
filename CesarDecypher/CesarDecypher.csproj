@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Infrasturcture\Alphabet.cs" />
     <Compile Include="Infrasturcture\CypherEnum.cs" />
     <Compile Include="Interfaces\IKeyGenerator.cs" />
     <Compile Include="Interfaces\IKeyHacker.cs" />
