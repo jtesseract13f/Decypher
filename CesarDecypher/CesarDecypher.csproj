@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\HillHackerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HillHackerForm.Designer.cs">
+      <DependentUpon>HillHackerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Infrasturcture\Alphabet.cs" />
     <Compile Include="Infrasturcture\CypherEnum.cs" />
     <Compile Include="Interfaces\IKeyGenerator.cs" />
@@ -90,6 +96,9 @@
     <Compile Include="Services\Cyphers\Vigenere.cs" />
     <EmbeddedResource Include="Forms\FrequencyPlot.resx">
       <DependentUpon>FrequencyPlot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HillHackerForm.resx">
+      <DependentUpon>HillHackerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\KeyGenForm.resx">
       <DependentUpon>KeyGenForm.cs</DependentUpon>

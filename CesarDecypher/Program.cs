@@ -31,19 +31,9 @@ namespace CesarDecypher
                         new List<int>{0, 1}
                 }
                 );
-            var Hill = new Hill("abcdefghijklmnopqrstuvwxyz".ToCharArray(), "3,3;2,5");
-            var encryptedMessage = Hill.Encrypt("help");
+            var Hill = new Hill("абвгдеёжзийклмнопрстуфхцчшщъыьэюя !,?".ToCharArray(), "3,3;2,5");
+            var encryptedMessage = Hill.Encrypt("утро встало негры пашут сука");
             var decryptedMessage = Hill.Decrypt(encryptedMessage);
-
-            var pairs = new List<Tuple<string, string>>()
-            {
-                new Tuple<string, string>("he", "hi"),
-                new Tuple<string, string>("lp", "at"),
-                };
-            var hacker = new HillHacker("abcdefghijklmnopqrstuvwxyz".ToCharArray(), pairs, 2);
-            var key = hacker.TryGetkey();
-            Hill._key = Hill.ParseKey(key);
-            var decrypted = Hill.Decrypt(encryptedMessage);
 
             
             try

@@ -37,7 +37,7 @@ namespace CesarDecypher.Services.KeyHackers
         {
             return GetValidKey().MatrixToString();
         }
-        public List<List<int>> GetValidKey()
+        List<List<int>> GetValidKey()
         {
             FindValidCombinations(0, new List<List<int>>(), new List<List<int>>());
             var Y = encryptedMatrixList.FirstOrDefault();
@@ -58,7 +58,7 @@ namespace CesarDecypher.Services.KeyHackers
             }
             return key;
         }
-        public void FindValidCombinations(int start, List<List<int>> sourceMatrix, List<List<int>> encryptedMatrix)
+        void FindValidCombinations(int start, List<List<int>> sourceMatrix, List<List<int>> encryptedMatrix)
         {
             if (sourceMatrix.Count == length)
             {

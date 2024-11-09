@@ -20,7 +20,6 @@ namespace CesarDecypher.Views
         MainForm main;
 
         private List<List<TextBox>> matrix;
-        //private System.Windows.Forms.Label label2;
         public KeyGenForm(MainForm _main)
         {
             main = _main;

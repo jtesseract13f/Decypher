@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CesarDecypher.Forms;
 using CesarDecypher.Infrasturcture;
 using CesarDecypher.Services;
 using CesarDecypher.Services.Cyphers;
@@ -199,7 +200,8 @@ namespace CesarDecypher
 
         private void magicButton_Click(object sender, EventArgs e)
         {
-            keyBox.Text = keyProcessor.ProcessKey(alphabet, message).ToString();
+            var hacker = new HillHackerForm(this);
+            hacker.Show();
         }
 
         private void buttonFrequency_Click(object sender, EventArgs e)
