@@ -26,16 +26,11 @@ namespace CesarDecypher.Services.KeyHackers
 
             for (int i = 0; i < _stringPairs.Count; i++) {
                 _stringPairs[i].Deconstruct(out var source, out var encrypted);
-                if (source.Length < length || source.Length != encrypted.Length)
+                if (source.Length < length)
                 {
                     throw new Exception($"Размеры частей текста исходного и зашифрованного сообщения не совпадают:\n {source}\n{encrypted}\nНеобходимая длина:{length}");
                 }
-                var sourcePart = alphabet.ToInt(source);
-                var encryptedPart = alphabet.ToInt(encrypted);
-                for (int j = 0; j < source.Length-length; j++)
-                {
-                    // СЮДАААААААА
-                }
+                pairs.Add(new Tuple<List<int>, List<int>>(alphabet.ToInt(source), alphabet.ToInt(encrypted)));
             }
         }
         public string TryGetkey()
@@ -52,7 +47,16 @@ namespace CesarDecypher.Services.KeyHackers
             {
                 throw new Exception("Ключ не найден");
             }
-            return Y.Multiply(X.InverseModulo(alphabet.Size));
+            var k = Y.Multiply(Y.InverseModulo(alphabet.Size));
+            var key = Y.Transpose().Multiply(X.InverseModulo(alphabet.Size).Transpose());
+            for (int i = 0; i < key.Count; ++i)
+            {
+                for (int j = 0; j < key[i].Count; ++j)
+                {
+                    key[i][j] = key[i][j].ToPositive(alphabet.Size);
+                }
+            }
+            return key;
         }
         public void FindValidCombinations(int start, List<List<int>> sourceMatrix, List<List<int>> encryptedMatrix)
         {
@@ -67,8 +71,8 @@ namespace CesarDecypher.Services.KeyHackers
                     var message = ex.Message;
                     return;
                 }
-                sourceMatrixList.Add(sourceMatrix);
-                encryptedMatrixList.Add(encryptedMatrix);
+                sourceMatrixList.Add(sourceMatrix.Select(x => x.Select(y => y).ToList()).ToList());
+                encryptedMatrixList.Add(encryptedMatrix.Select(x => x.Select(y => y).ToList()).ToList());
                 return;
             }
 
@@ -81,8 +85,5 @@ namespace CesarDecypher.Services.KeyHackers
                 encryptedMatrix.RemoveAt(encryptedMatrix.Count - 1);
             }
         }
-
-        // осталось: проверять имеющиеся кусочки на подходящесть
-        // дробить крупные строки 
     }
 }

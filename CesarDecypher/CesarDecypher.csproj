@@ -91,6 +91,9 @@
     <EmbeddedResource Include="Forms\FrequencyPlot.resx">
       <DependentUpon>FrequencyPlot.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\KeyGenForm.resx">
+      <DependentUpon>KeyGenForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
