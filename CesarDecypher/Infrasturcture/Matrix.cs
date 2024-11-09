@@ -30,6 +30,22 @@ namespace CesarDecypher.Infrasturcture
             return result;
         }
 
+
+        public static List<List<int>> Transpose(this List<List<int>> matrix)
+        {
+            var res = new List<List<int>>();
+
+            for (int i = 0; i < matrix[0].Count; ++i)
+            {
+                res.Add(new List<int>());
+                for (int j = 0; j < matrix.Count; ++j)
+                {
+                    res[i].Add(matrix[j][i]);
+                }
+            }
+
+            return res;
+        }
         public static List<List<int>> InverseModulo(this List<List<int>> matrix, int modulo)
         {
             var result = matrix.Incidence();
@@ -38,6 +54,7 @@ namespace CesarDecypher.Infrasturcture
             {
                 for (int j = 0; j < matrix.Count; ++j)
                 {
+                    //result[i][j] %= modulo;
                     result[i][j] *= inverseDeterminant;
                 }
             }

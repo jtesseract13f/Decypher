@@ -11,88 +11,79 @@ namespace CesarDecypher.Services.KeyHackers
 {
     public class HillHacker : IKeyHacker
     {
-        char[] alphabet;
-        public Dictionary<char, int> _charToInt;
+        Alphabet alphabet;
+        int length;
+        List<Tuple<List<int>, List<int>>> pairs;
 
-        string sourceText;
-        string encryptedText;
-        public int length = -1;
+        List<List<List<int>>> sourceMatrixList = new List<List<List<int>>>();
+        List<List<List<int>>> encryptedMatrixList = new List<List<List<int>>>();
 
-        public HillHacker(char[] _alphabet, string _sourceText, string _encryptedText, int _length)
+        public HillHacker(char[] _alphabet, List<Tuple<string, string>> _stringPairs, int _length)
         {
-            alphabet = _alphabet;
-            sourceText = _sourceText;
-            encryptedText = _encryptedText;
+            alphabet = new Alphabet(_alphabet);
             length = _length;
-            _charToInt = new Dictionary<char, int>();
-            for (int i = 0; i < alphabet.Length; i++)
-            {
-                _charToInt[alphabet[i]] = i;
+            pairs = new List<Tuple<List<int>, List<int>>>();
+
+            for (int i = 0; i < _stringPairs.Count; i++) {
+                _stringPairs[i].Deconstruct(out var source, out var encrypted);
+                if (source.Length < length)
+                {
+                    throw new Exception($"Размеры частей текста исходного и зашифрованного сообщения не совпадают:\n {source}\n{encrypted}\nНеобходимая длина:{length}");
+                }
+                pairs.Add(new Tuple<List<int>, List<int>>(alphabet.ToInt(source), alphabet.ToInt(encrypted)));
             }
         }
         public string TryGetkey()
         {
-            //var hillEncryptor = new Hill(alphabet, "5 4;3 1");
-            return GetKeyMatrix().MatrixToString();
-            // взять первые н символов
-            // найти обратную по модулю матрицу
-            // перемножить вектор символов на обратную матрицу
+            return GetValidKey().MatrixToString();
         }
-
-        public List<List<int>> GetKeyMatrix()
+        List<List<int>> GetValidKey()
         {
-            var matrix = new List<List<int>>();
-            for (int i = 0; i < length; ++i)
-            {
-                matrix.Add(new List<int>());
-                for (int j = 0; j < length; ++j)
-                {
-                    matrix[i].Add(0);
-                }
-            }
-            
-            for (int i = 0; i < length; ++i)
-            {
-                for (int j = 0; j < length; ++j)
-                {
-                    matrix[i][j] = sourceText[(i*length + j)%sourceText.Length];
-                }
-            }
+            FindValidCombinations(0, new List<List<int>>(), new List<List<int>>());
+            var Y = encryptedMatrixList.FirstOrDefault();
+            var X = sourceMatrixList.FirstOrDefault();
 
-            var Y = new List<List<int>>();
-            for (int i = 0; i < length; ++i)
+            if (Y == null || X == null)
             {
-                Y.Add(new List<int>());
-                for (int j = 0; j < length; ++j)
+                throw new Exception("Ключ не найден");
+            }
+            var k = Y.Multiply(Y.InverseModulo(alphabet.Size));
+            var key = Y.Transpose().Multiply(X.InverseModulo(alphabet.Size).Transpose());
+            for (int i = 0; i < key.Count; ++i)
+            {
+                for (int j = 0; j < key[i].Count; ++j)
                 {
-                    Y[i].Add(0);
+                    key[i][j] = key[i][j].ToPositive(alphabet.Size);
                 }
             }
-
-            for (int i = 0; i < length; ++i)
-            {
-                for (int j = 0; j < length; ++j)
-                {
-                    Y[i][j] = encryptedText[(i * length + j) % encryptedText.Length];
-                }
-            }
-            var key = matrix.InverseModulo(alphabet.Length);
-            return key.Multiply(Y);
+            return key;
         }
-
-        public List<List<int>> GetBlock(string message, int index, int count)
+        void FindValidCombinations(int start, List<List<int>> sourceMatrix, List<List<int>> encryptedMatrix)
         {
-            var block = new List<List<int>>() {};
-            for (int i = index; i < count + index; ++i)
+            if (sourceMatrix.Count == length)
             {
-                if (!(i < message.Length))
+                try
                 {
-                    block.Add(new List<int>() { _charToInt[message[0]] });
-                    continue;
+                    sourceMatrix.InverseModulo(alphabet.Size);
                 }
-                block.Add(new List<int>() { _charToInt[message[i]] }); ;
+                catch (Exception ex)
+                {
+                    var message = ex.Message;
+                    return;
+                }
+                sourceMatrixList.Add(sourceMatrix.Select(x => x.Select(y => y).ToList()).ToList());
+                encryptedMatrixList.Add(encryptedMatrix.Select(x => x.Select(y => y).ToList()).ToList());
+                return;
             }
-            return block;
+
+            for (int i = start; i < pairs.Count; i++)
+            {
+                sourceMatrix.Add(pairs[i].Item1);
+                encryptedMatrix.Add(pairs[i].Item2);
+                FindValidCombinations(i + 1, sourceMatrix, encryptedMatrix);
+                sourceMatrix.RemoveAt(sourceMatrix.Count - 1);
+                encryptedMatrix.RemoveAt(encryptedMatrix.Count - 1);
+            }
         }
     }
 }

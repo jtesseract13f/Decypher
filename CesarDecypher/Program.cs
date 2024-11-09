@@ -1,6 +1,7 @@
 ﻿using CesarDecypher.Infrasturcture;
 using CesarDecypher.Services.Cyphers;
 using CesarDecypher.Services.KeyHackers;
+using CesarDecypher.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,28 +18,24 @@ namespace CesarDecypher
         [STAThread]
         static void Main()
         {
- 
-                var mat = Matrix.Multiply(
-                    new List<List<int>>
-                    {
+
+            var mat = Matrix.Multiply(
+                new List<List<int>>
+                {
                         new List<int>{5, 3},
                         new List<int>{4, 1}
-                    },
-                    new List<List<int>>
-                    {
+                },
+                new List<List<int>>
+                {
                         new List<int>{1, 0},
                         new List<int>{0, 1}
-                    }
-                    );
-                var Hill = new Hill("abcdefghijklmnopqrstuvwxyz. !".ToCharArray(), "6 24 1 2 7;13 16 10 13 1;18 2 23 15 7;9 24 11 16 21;20 7 22 3 17");
-                var encryptedMessage = Hill.Encrypt("helomotherfuckerdestroydestroy");
-                var decryptedMessage = Hill.Decrypt(encryptedMessage);
-                
-                var hacker = new HillHacker("abcdefghijklmnopqrstuvwxyz. !".ToCharArray(), "helomotherfuckerdestroydes", encryptedMessage, 5);
-                var key = hacker.TryGetkey();
-            Hill._key = Hill.ParseKey(key);
-            var decrypted = Hill.Decrypt(encryptedMessage);
+                }
+                );
+            var Hill = new Hill("абвгдеёжзийклмнопрстуфхцчшщъыьэюя !,?".ToCharArray(), "3,3;2,5");
+            var encryptedMessage = Hill.Encrypt("утро встало негры пашут сука");
+            var decryptedMessage = Hill.Decrypt(encryptedMessage);
 
+            
             try
             {
                 Application.EnableVisualStyles();
