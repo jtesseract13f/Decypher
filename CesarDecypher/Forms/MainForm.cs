@@ -12,6 +12,7 @@ using CesarDecypher.Infrasturcture;
 using CesarDecypher.Services;
 using CesarDecypher.Services.Cyphers;
 using CesarDecypher.Services.KeyGens;
+using CesarDecypher.Views;
 using CypherLogic.Interfaces;
 using CypherLogic.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -234,8 +235,8 @@ namespace CesarDecypher
                     keyBox.Text = shuffledTAlphabet.ToString();
                     break;
                 case "Hill":
-                    var geyken = new HillKeyGen(alphabet.ToArray());
-                    keyBox.Text = geyken.GenerateKey(2);
+                    var keyGenForm = new KeyGenForm(this);
+                    keyGenForm.Show();
                     break;
                 default:
                     keyBox.Text = (rand.Next() % alphabet.Length).ToString();

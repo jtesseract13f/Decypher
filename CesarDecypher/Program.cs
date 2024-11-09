@@ -50,7 +50,7 @@ namespace CesarDecypher
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new KeyGenForm());
+                Application.Run(new MainForm());
             }
             catch
             {

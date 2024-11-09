@@ -212,8 +212,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox keyBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox EncryptMetod;
         private System.Windows.Forms.TextBox textBox1;
@@ -226,7 +224,8 @@
         private System.Windows.Forms.Button magicButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button buttonFrequency;
-        private System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.TextBox keyBox;
     }
 }
 
