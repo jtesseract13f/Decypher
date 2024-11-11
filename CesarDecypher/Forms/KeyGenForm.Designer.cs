@@ -49,7 +49,7 @@
             // 
             this.matrixSize.Location = new System.Drawing.Point(209, 287);
             this.matrixSize.Maximum = new decimal(new int[] {
-            6,
+            7,
             0,
             0,
             0});

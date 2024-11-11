@@ -47,23 +47,39 @@ namespace CesarDecypher.Forms
 
         List<Tuple<string, string>> ExtractParts()
         {
-            var res = new List<Tuple<string, string>>();
-            for (int i = 0; i < parts.Count; ++i)
+            try
             {
-                res.Add(new Tuple<string, string>(parts[i][0].Text,  parts[i][1].Text));
+                var res = new List<Tuple<string, string>>();
+                for (int i = 0; i < parts.Count; ++i)
+                {
+                    res.Add(new Tuple<string, string>(parts[i][0].Text, parts[i][1].Text));
+                }
+                return res;
             }
-            return res;
+            catch (Exception ex)
+            {
+                    MessageBox.Show(ex.Message);
+                    return null;
+            }
+            
         }
 
-        private void findKeyButton_Click(object sender, EventArgs e)
+        void findKeyButton_Click(object sender, EventArgs e)
         {
-            hacker = new HillHacker(main.alphabet.ToArray(), ExtractParts(), (int)matrixSizeUpDown.Value);
-            var key = Hill.ParseKey(hacker.TryGetkey());
-            ////////
-            main.keyBox.Text = hacker.TryGetkey();
+            try
+            {
+                hacker = new HillHacker(main.alphabet.ToArray(), ExtractParts(), (int)matrixSizeUpDown.Value);
+                var key = Hill.ParseKey(hacker.TryGetkey());
+                ////////
+                main.keyBox.Text = hacker.TryGetkey();
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
-        private void addPairButton_Click(object sender, EventArgs e)
+        void addPairButton_Click(object sender, EventArgs e)
         {
             var button = new Button()
             {
@@ -87,7 +103,7 @@ namespace CesarDecypher.Forms
             FormateTextBoxes();
         }
 
-        private void deletePairButton(object sender, EventArgs e)
+        void deletePairButton(object sender, EventArgs e)
         {
             if (!(sender is Button)) {
                 return;

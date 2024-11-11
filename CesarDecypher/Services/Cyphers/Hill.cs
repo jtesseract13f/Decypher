@@ -55,7 +55,10 @@ namespace CesarDecypher.Services.Cyphers
             var builder = new StringBuilder();
             for (int i = 0; i < block.Count; i++)
             {
-                builder.Append(_alphabet[(block[i][0].ToPositive(_alphabet.Length))]);
+
+                    builder.Append(_alphabet[(block[i][0].ToPositive(_alphabet.Length)) % _alphabet.Length]);
+             
+                    
             }
             return builder;
         }

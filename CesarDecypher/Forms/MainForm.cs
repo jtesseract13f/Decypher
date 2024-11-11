@@ -29,7 +29,7 @@ namespace CesarDecypher
         public string result;
         public FrequencyAnalysator frequencyAnalysator;
         public KeyProcessor keyProcessor;
-        string russianAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        string russianAlphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя !,.";
         private const int WM_VSCROLL = 0x115;
         private const int SB_THUMBPOSITION = 4;
         readonly Dictionary<char, double> letterFrequencies = new Dictionary<char, double>
@@ -147,9 +147,9 @@ namespace CesarDecypher
                 var decryptor = this.MakeEncryptor(EncryptMetod.Text);
                 result = decryptor.Decrypt(message);
                 Result.Text = result;
-                frequencyAnalysator = new FrequencyAnalysator(alphabet);
-                frequencyAnalysator.GetFrequency(result, alphabet);
-                DisplayDictionaryInDataGridView();
+                //frequencyAnalysator = new FrequencyAnalysator(alphabet);
+                //frequencyAnalysator.GetFrequency(result, alphabet);
+                //DisplayDictionaryInDataGridView();
             }
             catch (Exception ex)
             {
@@ -165,9 +165,9 @@ namespace CesarDecypher
                 var encryptor = this.MakeEncryptor(EncryptMetod.Text);
                 result = encryptor.Encrypt(message);
                 Result.Text = result;
-                frequencyAnalysator = new FrequencyAnalysator(alphabet);
-                frequencyAnalysator.GetFrequency(result, alphabet);
-                DisplayDictionaryInDataGridView();
+                //frequencyAnalysator = new FrequencyAnalysator(alphabet);
+                //frequencyAnalysator.GetFrequency(result, alphabet);
+                //DisplayDictionaryInDataGridView();
             }
             catch(Exception ex)
             {
@@ -195,7 +195,7 @@ namespace CesarDecypher
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            alphabet = textBox2.Text.ToString().ToLower().ToArray();
+            alphabet = textBox2.Text.ToString().ToArray();
         }
 
         private void magicButton_Click(object sender, EventArgs e)

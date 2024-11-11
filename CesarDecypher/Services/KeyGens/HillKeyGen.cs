@@ -19,7 +19,7 @@ namespace CesarDecypher.Services.KeyGens
         }
         public string GenerateKey(int length)
         {
-            if (length < 2 || length > 6)
+            if (length < 2 || length > 7)
             {
                 throw new ArgumentException("Некорректная длина ключа. Размерность квадратной матрицы должна быть больше 2 и меньше 6");
             }
@@ -27,7 +27,7 @@ namespace CesarDecypher.Services.KeyGens
             for (int i = 0; i < length; i++) {
                 key.Add(new List<int>());
                 for (int j = 0; j < length; j++) {
-                    key[i].Add(19);
+                    key[i].Add(1);
                 }
             }
             while (!ValidateKey(key))
@@ -47,7 +47,8 @@ namespace CesarDecypher.Services.KeyGens
         {
             try
             {
-                matrix.Determinant().InverseModulo(alphabet.Length);
+                // matrix.Determinant().InverseModulo(alphabet.Length);
+                matrix.InverseModulo(alphabet.Length);
             }
             catch (Exception ex) 
             {

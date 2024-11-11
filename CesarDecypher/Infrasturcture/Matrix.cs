@@ -49,13 +49,13 @@ namespace CesarDecypher.Infrasturcture
         public static List<List<int>> InverseModulo(this List<List<int>> matrix, int modulo)
         {
             var result = matrix.Incidence();
-            var inverseDeterminant = matrix.Determinant().InverseModulo(modulo);
+            var inverseDeterminant = matrix.Determinant(modulo).InverseModulo(modulo);
             for (int i = 0; i < matrix.Count; ++i)
             {
                 for (int j = 0; j < matrix.Count; ++j)
                 {
-                    //result[i][j] %= modulo;
                     result[i][j] *= inverseDeterminant;
+                    result[i][j] = result[i][j].ToPositive(modulo);
                 }
             }
             return result;
@@ -75,9 +75,11 @@ namespace CesarDecypher.Infrasturcture
             }
             return result;
         }
-        public static int Determinant(this List<List<int>> matrix)
+        public static int Determinant(this List<List<int>> matrix, int modulo)
         {
             if (matrix.Count != matrix[0].Count) { throw new Exception("Матрица не является квадратной"); }
+
+            //var alp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя !,.".ToArray();
 
             if (matrix.Count == 1) return matrix[0][0];
 
@@ -86,7 +88,7 @@ namespace CesarDecypher.Infrasturcture
             for (int i = 0; i < matrix.Count; ++i)
             {
                 var sign = i % 2 == 0 ? 1 : -1;
-                det += Determinant(matrix.Cut(i, 0)) * matrix[i][0] * sign;
+                det += (Determinant(matrix.Cut(i, 0), modulo) * matrix[i][0] * sign).ToPositive(modulo);
             }
             return det;
         }
