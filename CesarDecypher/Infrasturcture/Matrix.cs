@@ -63,6 +63,7 @@ namespace CesarDecypher.Infrasturcture
 
         public static List<List<int>> Incidence(this List<List<int>> matrix)
         {
+            var a = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя !,.".ToArray();
             var result = new List<List<int>>();
             for (int j = 0; j < matrix[0].Count; ++j)
             {
@@ -70,7 +71,7 @@ namespace CesarDecypher.Infrasturcture
                 for (int i = 0; i < matrix.Count; ++i)
                 {
                     var sign = (i+j) % 2 == 0 ? 1 : -1;
-                    result[j].Add(matrix.Cut(i, j).Determinant()*sign);
+                    result[j].Add(matrix.Cut(i, j).Determinant(a.Length)*sign);
                 }
             }
             return result;
