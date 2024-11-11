@@ -18,24 +18,6 @@ namespace CesarDecypher
         [STAThread]
         static void Main()
         {
-
-            var mat = Matrix.Multiply(
-                new List<List<int>>
-                {
-                        new List<int>{5, 3},
-                        new List<int>{4, 1}
-                },
-                new List<List<int>>
-                {
-                        new List<int>{1, 0},
-                        new List<int>{0, 1}
-                }
-                );
-            var Hill = new Hill("абвгдеёжзийклмнопрстуфхцчшщъыьэюя !,?".ToCharArray(), "3,3;2,5");
-            var encryptedMessage = Hill.Encrypt("утро встало негры пашут сука");
-            var decryptedMessage = Hill.Decrypt(encryptedMessage);
-
-            
             try
             {
                 Application.EnableVisualStyles();
@@ -46,7 +28,6 @@ namespace CesarDecypher
             {
 
             }
-
         }
     }
 }
