@@ -62,6 +62,8 @@
     <Compile Include="Infrasturcture\CypherEnum.cs" />
     <Compile Include="Interfaces\IKeyGenerator.cs" />
     <Compile Include="Interfaces\IKeyHacker.cs" />
+    <Compile Include="Services\Cyphers\BackPack.cs" />
+    <Compile Include="Services\KeyGens\BackpackKeyGen.cs" />
     <Compile Include="Services\KeyGens\HillKeyGen.cs" />
     <Compile Include="Services\KeyHackers\HillHacker.cs" />
     <Compile Include="Forms\FrequencyPlot.cs">

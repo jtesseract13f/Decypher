@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CesarDecypher.Services.Cyphers
 {
-    public class BackPack : ICypher
+    internal class BackPack : ICypher
     {
-        public string AlghorithmName { get ; set ; }
+        public string AlghorithmName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public string Decrypt(string message)
         {
@@ -18,14 +18,8 @@ namespace CesarDecypher.Services.Cyphers
 
         public string Encrypt(string message)
         {
-
-            // как происходит шифровка и дешифровка?
-            // на вход поступают биты, байты или строки?
-            // как генерировать ключ?
-            // Как расшифровывать?
-            // Открытый и закрытый ключ
-            // что является открытым и закрытым ключем?
             throw new NotImplementedException();
+
         }
     }
 }
